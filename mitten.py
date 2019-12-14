@@ -66,6 +66,12 @@ def accounts():
 
     if user['token'] == token:
         if 'accounts' in user:
+            for account in accounts:
+                r = requests.post('http://34.89.193.58:' + str(ports[account['accountID'][:2]]) + '/transaction',
+                data = {'accountID' : account['accountID'],
+
+                       })
+                account['balance'] = int(r.content.decode())
             return jsonify(user['accounts'])
         else:
             return jsonify([])
