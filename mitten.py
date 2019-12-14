@@ -81,7 +81,10 @@ def transaction():
     ttype     = request.form.get('type')
     timestamp = time()
 
+    print(email)
     user = users.find_one({'email' : email})
+
+    print(user)
 
     if user['token'] == token:
         r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
