@@ -135,6 +135,10 @@ def card():
 
     print(user)
 
+    token = user['token']
+
+    print(token)
+
     for account in user['accounts']:
         print(account)
         if account['currency'] == currency:
