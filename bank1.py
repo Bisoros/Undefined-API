@@ -62,7 +62,7 @@ def transaction():
             if ammount <= account['balance']:
                 account['balance'] -= ammount
                 users.find_one_and_update({'id': accountID[2:4]}, 
-                                    {'$set': {'accounts': accountID}})
+                                    {'$set': {'accounts': accounts}})
 
                 r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/add',
                 json = {'accountID' : accountIDdest,
