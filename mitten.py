@@ -74,7 +74,7 @@ def account():
                                   'currency'  : currency,
                       }}})
 
-        return ok
+        return 'ok'
     else:
         return 'da-te in mortii ma-tii'
 
