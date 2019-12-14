@@ -67,7 +67,7 @@ def accounts():
     if user['token'] == token:
         if 'accounts' in user:
             for account in user['accounts']:
-                r = requests.post('http://34.89.193.58:' + str(ports[account['accountID'][:2]]) + '/balance',
+                r = requests.get('http://34.89.193.58:' + str(ports[account['accountID'][:2]]) + '/balance',
                 data = {'accountID' : account['accountID'],
 
                        })
