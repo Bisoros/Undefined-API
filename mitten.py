@@ -44,8 +44,36 @@ def get_user():
     else:
         return 'da-te in mortii ma-tii'
 
+@app.route('/accounts', methods = ['GET'])
+def get_user():
+    email    = request.form.get('email')
+    token    = request.form.get('token')
+
+    user = users.find_one({'email' : email})
+
+    if user['token'] == token:
+        return user['accounts']
+    else:
+        return 'da-te in mortii ma-tii'
+
+@app.route('/account', methods = ['POST'])
+def get_user():
+    email     = request.form.get('email')
+    token     = request.form.get('token')
+    accountID = request.form.get('accountID')
+    currency  = request.form.get('currency')
+
+    user = users.find_one({'email' : email})
+
+    if user['token'] == token:
+        users.update({'email' : email},
+                      {'$push' : {'accountID' : accountID,
+                                  'currency'  : currency,
+                      }})
+    else:
+        return 'da-te in mortii ma-tii'
 
 if __name__ == '__main__':
-    app.run(port = 8081,
+    app.run(port = 8080,
             host = '0.0.0.0',
             )
