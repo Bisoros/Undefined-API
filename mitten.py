@@ -39,6 +39,7 @@ def create_user():
 
 @app.route('/user', methods = ['GET'])
 def get_user():
+    print(request)
     email    = request.form.get('email')
     password = request.form.get('password').encode()
 
@@ -145,7 +146,6 @@ def card():
                        })
 
             return 'Transaction succesfull'
-
     return 'Transaction failed'
 
 if __name__ == '__main__':
