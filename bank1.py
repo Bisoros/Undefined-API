@@ -62,7 +62,7 @@ def transaction():
                 users.find_one_and_update({'id': accountID[2:4]}, 
                                     {'$set': {'accounts': accountID}})
 
-                r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
+                r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/add',
                 json = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
                        })
