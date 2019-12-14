@@ -3,7 +3,7 @@ import bcrypt
 from secrets import token_urlsafe
 import requests
 from time import time
-
+import json
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.mitten
@@ -71,7 +71,7 @@ def accounts():
                 data = {'accountID' : account['accountID'],
 
                        })
-                account['balance'] = int(r.content.decode())
+                account['balance'] = json.load(r.content.decode())['balance']
             return jsonify(user['accounts'])
         else:
             return jsonify([])
