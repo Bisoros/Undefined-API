@@ -22,6 +22,8 @@ app = Flask(__name__)
 def balance():
     accountID = request.form.get('accountID')
 
+    print(accountID)
+
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
 
     for account in accounts:
@@ -52,6 +54,7 @@ def transaction():
     accountIDdest = request.form.get('accountIDdest')
     ammount       = int(request.form.get('ammount'))
 
+    print(accountID, ammount, accountIDdest)
 
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
     print(accounts)
