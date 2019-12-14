@@ -145,7 +145,7 @@ def card():
                         'email'     : user['email'],
                         'token'     : user['token'],
                         'type'      : ttype,
-                        'currency'  : user['currency'],
+                        'currency'  : currency,
                        })
 
             return 'Transaction succesfull'
