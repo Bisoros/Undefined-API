@@ -27,6 +27,8 @@ def create_user():
         'token'  : token,
     })
 
+    return 'ok'
+
 
 
 
