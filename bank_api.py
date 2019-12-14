@@ -34,14 +34,15 @@ def get_user():
     email    = request.form.get('email')
     password = request.form.get('password').encode()
 
-    salt   = bcrypt.gensalt()
+    user = users.find_one({'email' : email})
+
+    salt   = user['salt']
     hashed = bcrypt.hashpw(password, salt)
 
-    user = users.find_one({'email' : email})
-    del user['_id']
-    
-    return jsonify(user)
-
+    if user['hashed'] == hashed:
+        return user['token']
+    else:
+        return 'da-te in mortii ma-tii'
 
 
 if __name__ == '__main__':
