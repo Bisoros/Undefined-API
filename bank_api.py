@@ -9,7 +9,7 @@ users = db.users
 
 app = Flask(__name__)
 
-@app.route('/user', methods = ['GET'])
+@app.route('/user', methods = ['POST'])
 def create_user():
     print(request.data)
     email    = request.data.get('email')
