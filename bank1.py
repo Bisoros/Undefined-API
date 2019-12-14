@@ -57,7 +57,7 @@ def transaction():
 
     for account in accounts:
         if account['accountID'] == accountID[4:6]:
-            if ammount > balance:
+            if ammount > account['balance']:
                 account['balance'] -= int(ammount)
                 users.find_one_and_update({'id': accountID[2:4]}, 
                                     {'$set': {'accounts': accountID}})
