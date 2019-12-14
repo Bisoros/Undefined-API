@@ -52,7 +52,10 @@ def accounts():
     user = users.find_one({'email' : email})
 
     if user['token'] == token:
-        return user['accounts']
+        if 'accounts' in user:
+            return user['accounts']
+        else:
+            return []
     else:
         return 'da-te in mortii ma-tii'
 
