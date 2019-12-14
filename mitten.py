@@ -87,8 +87,9 @@ def transaction():
     print(user)
 
     if user['token'] == token:
-        r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/add',
-                data = {'accountID' : accountIDdest,
+        r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/transaction',
+                data = {'accountID' : accountID,
+                        'accountIDdest' : accountIDdest,
                         'ammount'   : ammount,
                        })
 

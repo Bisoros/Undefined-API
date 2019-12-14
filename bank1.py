@@ -54,6 +54,7 @@ def transaction():
     accountIDdest = request.form.get('accountIDdest')
     ammount       = int(request.form.get('ammount'))
 
+    print('heeeeeeeeeeeeeeeeeeeeeeeeelp')
     print(accountID, ammount, accountIDdest)
 
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
