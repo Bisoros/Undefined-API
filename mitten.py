@@ -55,6 +55,7 @@ def get_user():
     else:
         return 'da-te in mortii ma-tii'
 
+@app.route('/getaccounts', methods = ['POST'])
 @app.route('/accounts', methods = ['GET'])
 def accounts():
     email    = request.form.get('email')
