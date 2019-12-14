@@ -133,7 +133,7 @@ def card():
 
     user = users.find_one({'card' : uid})
 
-    for account in accounts:
+    for account in user['accounts']:
         if account['currency'] == currency:
             r = requests.post('http://34.89.193.58:' + 8080 + '/transaction',
                 json = {'accountID' : accountIDdest,
