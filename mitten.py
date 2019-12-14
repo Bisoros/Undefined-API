@@ -146,7 +146,7 @@ def card():
         print(account)
         if account['currency'] == currency:
             r = requests.post('http://34.89.193.58:8080/transaction',
-                json = {'accountID' : accountIDdest,
+                data = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
                         'email'     : user['email'],
                         'token'     : token,
