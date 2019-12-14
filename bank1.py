@@ -40,10 +40,10 @@ def add():
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
 
     for account in accounts:
-        if account['id'] == accountID[4:6]:
+        if account['accountID'] == accountID[4:6]:
             account['balance'] += ammount
             users.find_one_and_update({'id': accountID[2:4]}, 
-                                 {'$set': {'accounts': accountID}})
+                                 {'$set': {'accounts': accounts}})
             return 'ok'
 
 @app.route('/transaction', methods = ['POST'])
