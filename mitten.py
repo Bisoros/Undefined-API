@@ -70,13 +70,16 @@ def account():
 
     if user['token'] == token:
         users.update({'email' : email},
-                      {'$push' : {'accountID' : accountID,
+                      {'$push' : {'accounts' : {'accountID' : accountID,
                                   'currency'  : currency,
-                      }})
+                      }}})
+
+        return ok
     else:
         return 'da-te in mortii ma-tii'
 
 if __name__ == '__main__':
     app.run(port = 8080,
             host = '0.0.0.0',
+            debug = True,
             )
