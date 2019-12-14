@@ -65,9 +65,9 @@ def transaction():
                                     {'$set': {'accounts': accounts}})
 
                 r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/add',
-                data = json.dumps({'accountID' : accountIDdest,
+                data = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
-                       }))
+                       })
 
                 return 'ok'
             else:
