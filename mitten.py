@@ -54,7 +54,7 @@ def get_user():
                         'name'  : user['name'],
         }) 
     else:
-        return 'da-te in mortii ma-tii'
+        return 0
 
 @app.route('/getaccounts', methods = ['POST'])
 @app.route('/accounts', methods = ['GET'])
@@ -70,7 +70,7 @@ def accounts():
         else:
             return jsonify([])
     else:
-        return 'da-te in mortii ma-tii'
+        return 0
 
 @app.route('/transaction', methods = ['POST'])
 def transaction():
@@ -95,6 +95,10 @@ def transaction():
                         'ammount'   : ammount,
                        })
 
+        print(r.content)
+        if r.content == 'no money':
+            return 0
+
 
         users.update({'email' : email},
                       {'$push' : {'transactions' : {
@@ -107,7 +111,7 @@ def transaction():
 
         return 'ok'
     else:
-        return 'da-te in mortii ma-tii'
+        return 0
 
 @app.route('/account', methods = ['POST'])
 def account():
@@ -127,7 +131,7 @@ def account():
 
         return 'ok'
     else:
-        return 'da-te in mortii ma-tii'
+        return 0
 
 @app.route('/card', methods = ['POST'])
 def card():
@@ -157,6 +161,10 @@ def card():
                         'type'      : ttype,
                         'currency'  : currency,
                        })
+
+            print(r.content)
+            if r.content == 0:
+                return 'Transaction failed'
 
             return 'Transaction succesfull'
     return 'Transaction failed'
