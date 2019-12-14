@@ -1,5 +1,6 @@
 from flask import Flask, request, Response, jsonify, redirect, render_template, session
 import bcrypt
+from secrets import token_urlsafe
 
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
@@ -14,14 +15,16 @@ def create_user():
     password = request.form.get('password').encode()
     name     = request.form.get('name')
 
-    salt = bcrypt.gensalt()
+    salt   = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password, salt)
+    token  = token_urlsafe(16) 
 
     users.insert({
         'email'  : email,
         'hashed' : hashed,
         'name'   : name,
         'salt'   : salt,
+        'token'  : token,
     })
 
 
