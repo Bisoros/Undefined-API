@@ -96,7 +96,7 @@ def transaction():
                        })
 
         print(r.content)
-        if r.content.encode() == 'no money':
+        if r.content.decode() == 'no money':
             return 0
 
 
