@@ -123,7 +123,7 @@ def account():
     else:
         return 'da-te in mortii ma-tii'
 
-@app.route('/card', methods = ['GET'])
+@app.route('/card', methods = ['POST'])
 def card():
     uid           = request.form.get('uid')
     ammount       = request.form.get('ammount')
@@ -134,6 +134,7 @@ def card():
     user = users.find_one({'card' : uid})
 
     for account in user['accounts']:
+        print(account)
         if account['currency'] == currency:
             r = requests.post('http://34.89.193.58:' + 8080 + '/transaction',
                 json = {'accountID' : accountIDdest,
