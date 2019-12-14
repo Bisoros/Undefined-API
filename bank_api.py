@@ -30,7 +30,7 @@ def create_user():
     return 'ok'
 
 @app.route('/user', methods = ['GET'])
-def create_user():
+def get_user():
     email    = request.form.get('email')
     password = request.form.get('password').encode()
 
