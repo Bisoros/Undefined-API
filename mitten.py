@@ -96,7 +96,7 @@ def transaction():
                                   'currency'      : currency,
                                   'accountIDdest' : accountIDdest,
                                   'type'          : ttype,
-                                  'timestamp'     : time,
+                                  'timestamp'     : timestamp,
                       }}})
 
         return 'ok'
@@ -117,7 +117,6 @@ def account():
                       {'$push' : {'accounts' : {
                                   'accountID' : accountID,
                                   'currency'  : currency,
-                                  'timestamp' : time,
                       }}})
 
         return 'ok'
