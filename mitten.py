@@ -144,7 +144,7 @@ def card():
                         'ammount'   : ammount,
                         'email'     : user['email'],
                         'token'     : user['token'],
-                        'type'      : user['type'],
+                        'type'      : ttype,
                         'currency'  : user['currency'],
                        })
 
