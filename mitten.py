@@ -53,9 +53,9 @@ def accounts():
 
     if user['token'] == token:
         if 'accounts' in user:
-            return user['accounts']
+            return jsonify(user['accounts'])
         else:
-            return []
+            return jsonify([])
     else:
         return 'da-te in mortii ma-tii'
 
