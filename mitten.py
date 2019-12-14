@@ -103,7 +103,7 @@ def account():
         return 'da-te in mortii ma-tii'
 
 @app.route('/transaction', methods = ['POST'])
-def account():
+def transaction():
     email         = request.form.get('email')
     token         = request.form.get('token')
     accountID     = request.form.get('accountID')
