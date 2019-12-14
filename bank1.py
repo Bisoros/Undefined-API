@@ -41,7 +41,7 @@ def add():
 
     for account in accounts:
         if account['accountID'] == accountID[4:6]:
-            account['balance'] += ammount
+            account['balance'] += int(ammount)
             users.find_one_and_update({'id': accountID[2:4]}, 
                                  {'$set': {'accounts': accounts}})
             return 'ok'
