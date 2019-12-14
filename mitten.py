@@ -1,6 +1,8 @@
 from flask import Flask, request, Response, jsonify, redirect, render_template, session
 import bcrypt
 from secrets import token_urlsafe
+import requests
+from time import time
 
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
@@ -8,6 +10,12 @@ db = client.mitten
 users = db.users
 
 app = Flask(__name__)
+
+ports = {
+    'B1' : 8081,
+    'B2' : 8082,
+    'B3' : 8083,
+}
 
 @app.route('/user', methods = ['POST'])
 def create_user():
@@ -62,17 +70,58 @@ def accounts():
 @app.route('/account', methods = ['POST'])
 def account():
     email     = request.form.get('email')
+    ammount   = request.form.get('ammount')
     token     = request.form.get('token')
     accountID = request.form.get('accountID')
+    accountIDdest = request.form.get('accountIDdest')
     currency  = request.form.get('currency')
+    ttype     = request.form.get('type')
+    timestamp = time()
+
+    user = users.find_one({'email' : email})
+
+    if user['token'] == token:
+        r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
+                json = {'accountID' : accountIDdest,
+                        'ammount'   : ammount,
+                       })
+
+
+        users.update({'email' : email},
+                      {'$push' : {'transactions' : {
+                                  'accountID'     : accountID,
+                                  'currency'      : currency,
+                                  'accountIDdest' : accountIDdest,
+                                  'type'          : ttype,
+                                  'timestamp'     : time,
+                      }}})
+
+        return 'ok'
+    else:
+        return 'da-te in mortii ma-tii'
+
+@app.route('/transaction', methods = ['POST'])
+def account():
+    email         = request.form.get('email')
+    token         = request.form.get('token')
+    accountID     = request.form.get('accountID')
+    accountIDdest = request.form.get('accountIDdest')
+    currency      = request.form.get('currency')
+    ttype         = request.form.get('type')
 
     user = users.find_one({'email' : email})
 
     if user['token'] == token:
         users.update({'email' : email},
-                      {'$push' : {'accounts' : {'accountID' : accountID,
+                      {'$push' : {'transactions' : {
+                                  'accountID' : accountID,
                                   'currency'  : currency,
                       }}})
+
+        r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
+                json = {'accountID' : accountIDdest,
+                        'ammount'   : ammount,
+                       })
 
         return 'ok'
     else:
