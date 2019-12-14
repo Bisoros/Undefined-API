@@ -19,7 +19,7 @@ ports = {
 app = Flask(__name__)
 
 @app.route('/balance', methods = ['GET'])
-def create_user():
+def balance():
     accountID = request.form.get('accountID')
 
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
@@ -32,7 +32,7 @@ def create_user():
                 })
 
 @app.route('/add', methods = ['POST'])
-def create_user():
+def add():
     accountID = request.form.get('accountID')
     ammount   = request.form.get('ammount')
 
@@ -47,7 +47,7 @@ def create_user():
             return 'ok'
 
 @app.route('/transaction', methods = ['POST'])
-def create_user():
+def transaction():
     accountID     = request.form.get('accountID')
     accountIDdest = request.form.get('accountIDdest')
     ammount       = request.form.get('ammount')
