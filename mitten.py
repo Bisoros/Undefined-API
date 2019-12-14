@@ -131,6 +131,7 @@ def card():
     accountIDdest = request.form.get('accountIDdest')
     ttype         = request.form.get('type')
 
+    print
     user = users.find_one({'card' : uid})
 
     print(user)
@@ -138,7 +139,7 @@ def card():
     for account in user['accounts']:
         print(account)
         if account['currency'] == currency:
-            r = requests.post('http://34.89.193.58:' + 8080 + '/transaction',
+            r = requests.post('http://34.89.193.58:8080/transaction',
                 json = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
                         'email'     : user['email'],
