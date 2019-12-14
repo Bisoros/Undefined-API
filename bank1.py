@@ -69,7 +69,6 @@ def transaction():
                         'ammount'   : ammount,
                        }))
 
-                print
                 return 'ok'
             else:
                 return 'no money'
