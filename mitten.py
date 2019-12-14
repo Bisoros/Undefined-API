@@ -146,7 +146,7 @@ def card():
                 json = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
                         'email'     : user['email'],
-                        'token'     : user['token'],
+                        'token'     : token,
                         'type'      : ttype,
                         'currency'  : currency,
                        })
