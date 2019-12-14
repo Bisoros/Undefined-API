@@ -54,8 +54,10 @@ def transaction():
 
 
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
+    print(accounts)
 
     for account in accounts:
+        print(account)
         if account['accountID'] == accountID[4:6]:
             if ammount <= account['balance']:
                 account['balance'] -= ammount
