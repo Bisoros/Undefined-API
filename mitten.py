@@ -45,7 +45,7 @@ def get_user():
         return 'da-te in mortii ma-tii'
 
 @app.route('/accounts', methods = ['GET'])
-def get_user():
+def accounts():
     email    = request.form.get('email')
     token    = request.form.get('token')
 
@@ -57,7 +57,7 @@ def get_user():
         return 'da-te in mortii ma-tii'
 
 @app.route('/account', methods = ['POST'])
-def get_user():
+def account():
     email     = request.form.get('email')
     token     = request.form.get('token')
     accountID = request.form.get('accountID')
