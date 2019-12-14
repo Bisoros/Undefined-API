@@ -4,7 +4,7 @@ from secrets import token_urlsafe
 
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
-db = client.bank1
+db = client.mitten
 users = db.users
 
 app = Flask(__name__)
@@ -29,6 +29,17 @@ def create_user():
 
     return 'ok'
 
+@app.route('/user', methods = ['GET'])
+def create_user():
+    email    = request.form.get('email')
+    password = request.form.get('password').encode()
+
+    salt   = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password, salt)
+
+    user = users.find_one({'email' : email})
+
+    return jsonify(user)
 
 
 
