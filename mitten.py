@@ -108,6 +108,7 @@ def account():
     accountIDdest = request.form.get('accountIDdest')
     currency      = request.form.get('currency')
     ttype         = request.form.get('type')
+    ammount       = request.form.get('ammount')
 
     user = users.find_one({'email' : email})
 

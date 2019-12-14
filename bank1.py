@@ -4,7 +4,7 @@ from secrets import token_urlsafe
 
 from pymongo import MongoClient
 
-import requests
+import requests, json
 
 client = MongoClient('localhost', 27017)
 db = client.bank1
@@ -65,10 +65,11 @@ def transaction():
                                     {'$set': {'accounts': accounts}})
 
                 r = requests.post('http://34.89.193.58:' + str(ports[accountIDdest[:2]]) + '/add',
-                json = {'accountID' : accountIDdest,
+                data = json.dumps({'accountID' : accountIDdest,
                         'ammount'   : ammount,
-                       })
+                       }))
 
+                print
                 return 'ok'
             else:
                 return 'no money'
