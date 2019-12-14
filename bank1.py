@@ -50,7 +50,7 @@ def add():
 def transaction():
     accountID     = request.form.get('accountID')
     accountIDdest = request.form.get('accountIDdest')
-    ammount       = request.form.get('ammount')
+    ammount       = int(request.form.get('ammount'))
 
 
     accounts = users.find_one({'id' : accountID[2:4]})['accounts']
@@ -58,7 +58,7 @@ def transaction():
     for account in accounts:
         if account['accountID'] == accountID[4:6]:
             if ammount > account['balance']:
-                account['balance'] -= int(ammount)
+                account['balance'] -= ammount
                 users.find_one_and_update({'id': accountID[2:4]}, 
                                     {'$set': {'accounts': accountID}})
 
