@@ -69,8 +69,8 @@ def accounts():
     else:
         return 'da-te in mortii ma-tii'
 
-@app.route('/account', methods = ['POST'])
-def account():
+@app.route('/transaction', methods = ['POST'])
+def transaction():
     email     = request.form.get('email')
     ammount   = request.form.get('ammount')
     token     = request.form.get('token')
@@ -102,29 +102,22 @@ def account():
     else:
         return 'da-te in mortii ma-tii'
 
-@app.route('/transaction', methods = ['POST'])
-def transaction():
-    email         = request.form.get('email')
-    token         = request.form.get('token')
-    accountID     = request.form.get('accountID')
-    accountIDdest = request.form.get('accountIDdest')
-    currency      = request.form.get('currency')
-    ttype         = request.form.get('type')
-    ammount       = request.form.get('ammount')
+@app.route('/account', methods = ['POST'])
+def account():
+    email     = request.form.get('email')
+    token     = request.form.get('token')
+    accountID = request.form.get('accountID')
+    currency  = request.form.get('currency')
 
     user = users.find_one({'email' : email})
 
     if user['token'] == token:
         users.update({'email' : email},
-                      {'$push' : {'transactions' : {
+                      {'$push' : {'accounts' : {
                                   'accountID' : accountID,
                                   'currency'  : currency,
+                                  'timestamp' : time,
                       }}})
-
-        r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
-                json = {'accountID' : accountIDdest,
-                        'ammount'   : ammount,
-                       })
 
         return 'ok'
     else:
@@ -138,7 +131,7 @@ def card():
     accountIDdest = request.form.get('accountIDdest')
     ttype         = request.form.get('type')
 
-    user = users.find_one({'card' : card})
+    user = users.find_one({'card' : uid})
 
     for account in accounts:
         if account['currency'] == currency:
