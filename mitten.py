@@ -131,7 +131,6 @@ def card():
     accountIDdest = request.form.get('accountIDdest')
     ttype         = request.form.get('type')
 
-    print
     user = users.find_one({'card' : uid})
 
     print(user)
