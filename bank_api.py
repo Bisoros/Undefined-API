@@ -38,7 +38,8 @@ def get_user():
     hashed = bcrypt.hashpw(password, salt)
 
     user = users.find_one({'email' : email})
-
+    del user['_id']
+    
     return jsonify(user)
 
 
