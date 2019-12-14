@@ -48,7 +48,9 @@ def get_user():
     hashed = bcrypt.hashpw(password, salt)
 
     if user['hashed'] == hashed:
-        return user['token']
+        return jsonify({'token' : user['token'],
+                        'name'  : user['name'],
+        }) 
     else:
         return 'da-te in mortii ma-tii'
 
@@ -82,7 +84,7 @@ def account():
 
     if user['token'] == token:
         r = requests.post('http://34.89.193.58:' + ports[accountIDdest[:2]] + '/add',
-                json = {'accountID' : accountIDdest,
+                data = {'accountID' : accountIDdest,
                         'ammount'   : ammount,
                        })
 
@@ -127,6 +129,31 @@ def account():
         return 'ok'
     else:
         return 'da-te in mortii ma-tii'
+
+@app.route('/card', methods = ['GET'])
+def card():
+    uid           = request.form.get('uid')
+    ammount       = request.form.get('ammount')
+    currency      = request.form.get('currency')
+    accountIDdest = request.form.get('accountIDdest')
+    ttype         = request.form.get('type')
+
+    user = users.find_one({'card' : card})
+
+    for account in accounts:
+        if account['currency'] == currency:
+            r = requests.post('http://34.89.193.58:' + 8080 + '/transaction',
+                json = {'accountID' : accountIDdest,
+                        'ammount'   : ammount,
+                        'email'     : user['email'],
+                        'token'     : user['token'],
+                        'type'      : user['type'],
+                        'currency'  : user['currency'],
+                       })
+
+            return 'Transaction succesfull'
+
+    return 'Transaction failed'
 
 if __name__ == '__main__':
     app.run(port = 8080,
