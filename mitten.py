@@ -37,6 +37,7 @@ def create_user():
 
     return 'ok'
 
+@app.route('/getuser', methods = ['POST'])
 @app.route('/user', methods = ['GET'])
 def get_user():
     print(request)
