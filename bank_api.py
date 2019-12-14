@@ -11,9 +11,11 @@ app = Flask(__name__)
 
 @app.route('/user', methods = ['POST'])
 def create_user():
+    print(request.form)
     email    = request.form.get('email')
     password = request.form.get('password').encode()
     name     = request.form.get('name')
+
 
     salt   = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password, salt)
