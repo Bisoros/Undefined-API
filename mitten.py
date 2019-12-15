@@ -60,23 +60,23 @@ def get_user():
 @app.route('/accounts', methods = ['GET'])
 def accounts():
     email    = request.form.get('email')
-    token    = request.form.get('token')
+    # token    = request.form.get('token')
 
     user = users.find_one({'email' : email})
 
-    if user['token'] == token:
-        if 'accounts' in user:
-            for account in user['accounts']:
-                r = requests.get('http://34.89.193.58:' + str(ports[account['accountID'][:2]]) + '/balance',
-                data = {'accountID' : account['accountID'],
+    # if user['token'] == token:
+    if 'accounts' in user:
+        for account in user['accounts']:
+            r = requests.get('http://34.89.193.58:' + str(ports[account['accountID'][:2]]) + '/balance',
+            data = {'accountID' : account['accountID'],
 
-                       })
-                account['balance'] = json.loads(r.content.decode())['balance']
-            return jsonify(user['accounts'])
-        else:
-            return jsonify([])
+                    })
+            account['balance'] = json.loads(r.content.decode())['balance']
+        return jsonify(user['accounts'])
     else:
-        return '0'
+        return jsonify([])
+    # else:
+    #     return '0'
 
 @app.route('/transaction', methods = ['POST'])
 def transaction():
