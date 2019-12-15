@@ -59,10 +59,10 @@ def get_user():
 @app.route('/getaccounts', methods = ['POST'])
 @app.route('/accounts', methods = ['GET'])
 def accounts():
-    email    = request.form.get('email')
+    # email    = request.form.get('email')
     # token    = request.form.get('token')
 
-    user = users.find_one({'email' : email})
+    user = users.find_one({'name' : 'Luca'})
 
     # if user['token'] == token:
     print(user['accounts'])
