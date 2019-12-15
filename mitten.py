@@ -74,7 +74,8 @@ def accounts():
 
                     })
             account['balance'] = json.loads(r.content.decode())['balance']
-        return jsonify(user['accounts'])
+            
+        return jsonify(user['accounts'][1:])
     else:
         return jsonify([])
     # else:
