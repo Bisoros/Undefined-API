@@ -14,7 +14,7 @@ def getUID(currv, ammv):
             print(uid)
             r = requests.post('http://34.89.193.58:8080/card',
                         data = {'accountIDdest' : 'B179FG',
-                                'ammount'   : float(ammv),
+                                'ammount'   : int(ammv),
                                 'currency'  : currv,
                                 'type'      : 'groceries',
                                 'uid'       : uid,
