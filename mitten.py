@@ -65,7 +65,7 @@ def accounts():
     user = users.find_one({'email' : email})
 
     # if user['token'] == token:
-    print(accounts['accounts'])
+    print(user['accounts'])
     if 'accounts' in user:
         for account in user['accounts']:
             print(account['accountID'])
