@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify, redirect, render_template, session
+from flask import Flask, request, Response, jsonify, redirect, render_template, session, send_file
 import bcrypt
 from secrets import token_urlsafe
 import requests
@@ -113,6 +113,7 @@ def transaction():
                                   'accountIDdest' : accountIDdest,
                                   'type'          : ttype,
                                   'timestamp'     : timestamp,
+                                  'ammount'       : -float(ammount),
                       }}})
 
         return 'ok'
@@ -174,6 +175,11 @@ def card():
 
             return 'Transaction succesfull'
     return 'Transaction failed'
+
+@app.route('/img', methods = ['GET'])
+@app.route('/getimg', methods = ['POST'])
+def img():
+    return send_file(request.form.get('user') + '.png')
 
 if __name__ == '__main__':
     app.run(port = 8080,

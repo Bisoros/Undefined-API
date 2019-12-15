@@ -52,7 +52,7 @@ def add():
 def transaction():
     accountID     = request.form.get('accountID')
     accountIDdest = request.form.get('accountIDdest')
-    ammount       = int(request.form.get('ammount'))
+    ammount       = float(request.form.get('ammount'))
 
     print('heeeeeeeeeeeeeeeeeeeeeeeeelp')
     print(accountID, ammount, accountIDdest)
